@@ -65,7 +65,7 @@ export default function Dashboard() {
               <div className="bg-foreground text-background p-2">
                 <Sparkles className="h-6 w-6" />
               </div>
-              <h1 className="text-xl font-bold">LOAN PICKS</h1>
+              <h1 className="text-xl font-bold">Clickpe Assignment</h1>
             </div>
             <nav className="flex items-center gap-4">
               <Link href="/all-products">
