@@ -74,7 +74,9 @@ export function ChatDrawer({ product, isOpen, onClose }: ChatDrawerProps) {
 
       if (!res.ok) {
         const errorData = await res.json().catch(() => ({}));
-        throw new Error(errorData.error || errorData.details || `HTTP ${res.status}`);
+        throw new Error(
+          errorData.error || errorData.details || `HTTP ${res.status}`
+        );
       }
 
       const data = await res.json();
@@ -87,7 +89,8 @@ export function ChatDrawer({ product, isOpen, onClose }: ChatDrawerProps) {
       setMessages([...updatedMessages, assistantReply]);
     } catch (error) {
       console.error("Chat error:", error);
-      const errorMessage = error instanceof Error ? error.message : "Error contacting AI.";
+      const errorMessage =
+        error instanceof Error ? error.message : "Error contacting AI.";
       setMessages([
         ...updatedMessages,
         {
@@ -150,9 +153,44 @@ export function ChatDrawer({ product, isOpen, onClose }: ChatDrawerProps) {
         <div className="flex-1 overflow-y-auto p-2 bg-background">
           {messages.length === 0 ? (
             <div className="flex items-center justify-center h-full text-muted-foreground text-sm">
-              <p className="text-center px-4">
-                Ask any question about <strong>{product.name}</strong>
-              </p>
+              <div className="text-center px-6 w-full">
+                <p className="text-base font-medium text-foreground mb-6">
+                  Ask any question about <strong>{product.name}</strong>
+                </p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left mx-auto max-w-md">
+                  {/* Popular Questions */}
+                  <div className="border border-foreground/20 rounded-lg p-4 bg-card">
+                    <p className="font-semibold mb-2 text-foreground">
+                      Popular questions
+                    </p>
+                    <ul className="space-y-1 text-xs">
+                      <li>• What is the APR?</li>
+                      <li>• What is the minimum income required?</li>
+                      <li>• What is the minimum credit score?</li>
+                      <li>• Are there any processing fees?</li>
+                      <li>• Is prepayment allowed?</li>
+                    </ul>
+                  </div>
+
+                  {/* You can ask about */}
+                  <div className="border border-foreground/20 rounded-lg p-4 bg-card">
+                    <p className="font-semibold mb-2 text-foreground">
+                      You can ask about:
+                    </p>
+                    <ul className="space-y-1 text-xs">
+                      <li>• Interest rate (APR)</li>
+                      <li>• Minimum income</li>
+                      <li>• Credit score</li>
+                      <li>• Loan tenure</li>
+                      <li>• Processing fees</li>
+                      <li>• Prepayment policy</li>
+                      <li>• Disbursal speed</li>
+                      <li>• Documentation</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </div>
           ) : (
             <>
